@@ -14,6 +14,9 @@ import Divider from '@material-ui/core/Divider';
 import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';
 
+// Others
+import PropTypes from 'prop-types';
+
 const HeroDetails = ({ classes, hero, onClose }) => (
   <Dialog
     open
@@ -59,6 +62,20 @@ const HeroDetails = ({ classes, hero, onClose }) => (
   </Dialog>
 );
 
+HeroDetails.propTypes = {
+  classes: PropTypes.shape({}).isRequired,
+  hero: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    thumbnail: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    comics: PropTypes.arrayOf(PropTypes.string).isRequired,
+    series: PropTypes.arrayOf(PropTypes.string).isRequired,
+    stories: PropTypes.arrayOf(PropTypes.string).isRequired,
+    events: PropTypes.arrayOf(PropTypes.string).isRequired,
+  }).isRequired,
+  onClose: PropTypes.func.isRequired,
+};
+
 const Box = ({ classes, title, content }) => (
   <Grid className={classes.boxRoot}>
     <List
@@ -75,5 +92,11 @@ const Box = ({ classes, title, content }) => (
     </List>
   </Grid>
 );
+
+Box.propTypes = {
+  classes: PropTypes.shape({}).isRequired,
+  title: PropTypes.string.isRequired,
+  content: PropTypes.arrayOf(PropTypes.string).isRequired,
+}
 
 export default withStyles(styles)(HeroDetails);

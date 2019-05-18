@@ -11,6 +11,9 @@ import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';
 
+// Others
+import PropTypes from 'prop-types';
+
 const HeroCard = ({ classes, hero, clicked }) => {
   const { extension, path } = hero.thumbnail;
   const thumb = `${path}.${extension}`;
@@ -39,6 +42,19 @@ const HeroCard = ({ classes, hero, clicked }) => {
       </Grid>
     </Paper>
   )
+};
+
+HeroCard.propTypes = {
+  classes: PropTypes.shape({}).isRequired,
+  hero: PropTypes.shape({
+    thumbnail: PropTypes.shape({
+      path: PropTypes.string.isRequired,
+      extension: PropTypes.string.isRequired,
+    }),
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+  }).isRequired,
+  clicked: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(HeroCard);
