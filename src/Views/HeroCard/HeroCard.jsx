@@ -11,7 +11,7 @@ import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';
 
-const HeroCard = ({ classes, hero }) => {
+const HeroCard = ({ classes, hero, clicked }) => {
   const { extension, path } = hero.thumbnail;
   const thumb = `${path}.${extension}`;
   return (
@@ -20,7 +20,7 @@ const HeroCard = ({ classes, hero }) => {
         className={classes.mainContainer}
         container
         component={ButtonBase}
-        onClick={() => alert('clicked')}
+        onClick={() => clicked(hero.id)}
       >
         <Grid container style={{ height: 280 }}>
           <Grid

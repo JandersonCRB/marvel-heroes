@@ -5,6 +5,7 @@ import Grid from '@material-ui/core/Grid';
 
 // Components
 import HeroCard from './HeroCard/HeroCard';
+import HeroDetails from './HeroDetails/HeroDetails';
 
 // Styles
 import { withStyles } from '@material-ui/core/styles';
@@ -20,7 +21,7 @@ class Heroes extends React.Component {
   componentDidMount() {
     const { fetchMore } = this.props;
     let offset = 0;
-    // Fetch tthe first 20 characters
+    // Fetch the first 20 characters
     fetchMore(offset);
     window.addEventListener('scroll', function() {
       // Add a listener that is called when user reaches the end of page
@@ -31,14 +32,25 @@ class Heroes extends React.Component {
     });
   }
 
+  openDetails = (id) => {
+    const { selectCharacter } = this.props;
+    selectCharacter(id);
+  }
+  
+  closeDetails = () => {
+    const { selectCharacter } = this.props;
+    selectCharacter(null);
+  }
+
   render() {
-    const { classes, heroes } = this.props;
+    const { classes, heroes, selectedHero } = this.props;
 
     return (
       <Grid className={classes.root} container justify="center">
+        {selectedHero && <HeroDetails hero={selectedHero} onClose={this.closeDetails} />}
         {heroes.map(hero => (
           <Grid key={hero.id} item style={{ width: 'max-content'}}>
-            <HeroCard hero={hero} />
+            <HeroCard hero={hero} clicked={this.openDetails}/>
           </Grid>
         ))}
       </Grid>
@@ -49,6 +61,7 @@ class Heroes extends React.Component {
 
 const mapStateToProps = state => ({
   heroes: state.heroes.characters,
+  selectedHero: state.heroes.selectedCharacter,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(HeroesActions, dispatch)
