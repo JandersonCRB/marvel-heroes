@@ -43,16 +43,16 @@ const HeroDetails = ({ classes, hero, onClose }) => (
       </Grid>
     </Grid>
     <Grid className={classes.boxesContainer} container>
-      <Grid item xs={6}>
+      <Grid item xs={12} sm={6}>
         <Box classes={classes} title="Comics" content={hero.comics} />
       </Grid>
-      <Grid item xs={6}>
+      <Grid item xs={12} sm={6}>
         <Box classes={classes} title="Series" content={hero.series} />
       </Grid>
-      <Grid item xs={6}>
+      <Grid item xs={12} sm={6}>
         <Box classes={classes} title="Stories" content={hero.stories} />
       </Grid>
-      <Grid item xs={6}>
+      <Grid item xs={12} sm={6}>
         <Box classes={classes} title="Events" content={hero.events} />
       </Grid>
     </Grid>
